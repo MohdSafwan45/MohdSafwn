@@ -1,0 +1,64 @@
+def duration_calculator(age, time_unit):
+    """
+    Calculate the duration a person has lived in the chosen time unit.
+
+    Parameters:
+    age (int): The age of the person.
+    time_unit (str): The chosen time unit (Months, Weeks, Days, Hours, Minutes, Seconds).
+
+    Returns:
+    tuple: The duration and the formatted time unit.
+    """
+    if time_unit.lower() in ["m", "months"]:
+        return age * 12, "Months"
+    elif time_unit.lower() in ["w", "weeks"]:
+        return age * 52, "Weeks"
+    elif time_unit.lower() in ["d", "days"]:
+        return age * 365, "Days"
+    elif time_unit.lower() in ["h", "hours"]:
+        return age * 365 * 24, "Hours"
+    elif time_unit.lower() in ["min", "minutes"]:
+        return age * 365 * 24 * 60, "Minutes"
+    elif time_unit.lower() in ["s", "seconds"]:
+        return age * 365 * 24 * 60 * 60, "Seconds"
+    else:
+        return None, None
+
+
+def main():
+    """
+    Main function to interact with the user, take input and display the calculated duration.
+    """
+    try:
+        # Prompt user to input their age
+        age = int(input("What's your age? "))
+
+        # Check if the age is negative
+        if age < 0:
+            print("Age cannot be negative.")
+            return
+
+        # Prompt user to choose a time unit
+        time_unit = input(
+            "Please choose a time unit: Months, Weeks, Days, Hours, Minutes, Seconds.\nNote: You can write the first letter or the full name of the time unit. "
+        )
+
+        # Calculate the duration
+        duration, unit = duration_calculator(age, time_unit)
+
+        # Check if the time unit is valid
+        if duration is not None:
+            print(f"You lived for {duration} {unit}.")
+        else:
+            print(
+                "Invalid time unit. Please choose from Months, Weeks, Days, Hours, Minutes, Seconds."
+            )
+
+    except ValueError:
+        # Handle invalid input for age
+        print("Invalid input. Please enter a valid age.")
+
+
+# Entry point of the script
+if __name__ == "__main__":
+    main()
